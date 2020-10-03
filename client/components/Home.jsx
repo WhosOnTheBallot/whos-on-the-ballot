@@ -5,6 +5,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
   }
+  
+  
 
 
   //functionality for input field and button
@@ -28,7 +30,7 @@ class Home extends Component {
               placeholder="Enter your address here"
               type='text'
           />
-          <button onClick={(event) => this.props.addressSearch(event)}>
+          <button onClick={(event) => props.addressSearch(event)}>
             {/* <button onClick={this.props.addressSearch}> */}
               Search
             </button>
