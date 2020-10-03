@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 
 
-
-
 const Card = (props) => {
   return (
     <div className="card">

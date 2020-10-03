@@ -9,6 +9,9 @@ class Home extends Component {
 
 
 
+
+
+
   //functionality for input field and button
 
   // send this data to our API and potentially get info back  
@@ -35,7 +38,7 @@ class Home extends Component {
               Search
             </button>
         </form>
-      </div>
+      </div >
     )
 
   }
