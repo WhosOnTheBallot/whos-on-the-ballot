@@ -6,6 +6,7 @@ class Home extends Component {
     super(props);
   }
 
+
   //functionality for input field and button
 
     // send this data to our API and potentially get info back  
@@ -21,19 +22,17 @@ class Home extends Component {
     return (
       <div>
         <header className="header"><h1>Who's On The Ballot?</h1></header>
-        <div id='form'>
-          <form>
+        <form className="inputForm">
             <input
               id="addressInput"
               placeholder="Enter your address here"
               type='text'
-
-            ></input>
-            <button onClick={(event) => this.addressSearch(event)}>
+          />
+          <button onClick={(event) => this.props.addressSearch(event)}>
+            {/* <button onClick={this.props.addressSearch}> */}
               Search
             </button>
           </form>
-        </div>
       </div>
     )
   }

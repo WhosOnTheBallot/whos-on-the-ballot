@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Cards from './Cards.jsx'
+import Card from './Card.jsx'
 
 
 const Display = (props) => {
-  const cards = []
-  for (let i = 0; i < props.officials.length; i++) {
-    cards.push(<Card />)
-  }
+
+  const cards = props.officials.map((el) => {
+    <Card data={el} />
+  })
   return (
     <div>
       {cards}

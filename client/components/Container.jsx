@@ -31,8 +31,8 @@ class Container extends Component {
     } else {
       //if we dont' have data render home
       return (
-        <div className='home'>
-          <Home addressSearch={this.addressSearch} />
+        <div>
+          <Home className='home' addressSearch={this.addressSearch} />
         </div>
       )
     }
