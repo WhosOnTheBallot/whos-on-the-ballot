@@ -30,7 +30,7 @@ class Home extends Component {
               placeholder="Enter your address here"
               type='text'
           />
-          <button onClick={(event) => props.addressSearch(event)}>
+          <button onClick={this.props.addressSearch}>
             {/* <button onClick={this.props.addressSearch}> */}
               Search
             </button>
