@@ -15,12 +15,27 @@ class Container extends Component {
 
   addressSearch(event) {
     const address = event.target.value;
-    console.log(address);
+    if ((!address) || address.length < 5 || Number(address) === NaN) return;
+    const reqBody = { address: address }
+    fetch('/officials', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(reqBody)
+    })
+      .then((response) => response.json())
+      .then((officialsData) => {
+        this.setState({
+          ...this.state,
+          data: officialsData
+        })
+      })
   }
 
   render() {
     // conditional check if we have 
-    if (this.state.data) {
+    if (this.state.data.length) {
       return (
         <div>
           {/* // display rendered here */}
