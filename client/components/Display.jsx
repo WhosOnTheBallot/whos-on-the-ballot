@@ -4,10 +4,10 @@ import Card from './Card.jsx'
 
 
 const Display = (props) => {
-  const cards = []
-  for (let i = 0; i < props.officials.length; i++) {
-    cards.push(<Card official={props.officials[i]} />)
-  }
+
+  const cards = props.officials.map((el, index) => {
+    <Card official={props.officials[index]} />
+  })
   return (
     <div>
       {cards}

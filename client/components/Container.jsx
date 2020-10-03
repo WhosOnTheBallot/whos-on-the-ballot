@@ -14,13 +14,15 @@ class Container extends Component {
   }
 
   addressSearch(event) {
-    const address = event.target.value;
-    if ((!address) || address.length < 5 || Number(address) === NaN) return;
-    const reqBody = { address: address }
-    fetch('/officials', {
+    const zipcode = event.target.value;
+    if ((!zipcode) || zipcode.length < 5 || Number(zipcode) === NaN) return;
+    const reqBody = {
+      address: zipcode
+    }
+    fetch('/officals', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
+      header: {
+        'content-type': 'application/json'
       },
       body: JSON.stringify(reqBody)
     })
@@ -31,28 +33,34 @@ class Container extends Component {
           data: officialsData
         })
       })
-  }
+      .catch((err) => {
+        console.log('error:', err)
+        this.setState({
+          data: []
+        })
+      })
 
-  render() {
-    // conditional check if we have 
-    if (this.state.data.length) {
-      return (
-        <div>
-          {/* // display rendered here */}
-          <Display officials={this.state.data} />
-        </div>
-      )
-      //do something with data
-    } else {
-      //if we dont' have data render home
-      return (
-        <div className='home'>
-          <Home addressSearch={this.addressSearch} />
-        </div>
-      )
+
+    render() {
+      // conditional check if we have 
+      if (this.state.data) {
+        return (
+          <div>
+            {/* // display rendered here */}
+            <Display officials={this.state.data} />
+          </div>
+        )
+        //do something with data
+      } else {
+        //if we dont' have data render home
+        return (
+          <div>
+            <Home className='home' addressSearch={this.addressSearch} />
+          </div>
+        )
+      }
     }
   }
-
 }
 
 export default Container;
