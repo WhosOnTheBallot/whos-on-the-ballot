@@ -14,6 +14,7 @@ app.get('/', (req, res) => {
 
 // Handle route to /election using electionController middleware
 app.post('/officials', officialsController.getOfficials, (req, res) => {
+  console.log('last middleware in officials endpoint')
   res.status(200).json(res.locals.officialsData);
 });
 

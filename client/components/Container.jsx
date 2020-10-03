@@ -4,8 +4,8 @@ import Home from './Home.jsx'
 import Display from './Display.jsx';
 
 class Container extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       data: []
     }
@@ -13,18 +13,20 @@ class Container extends Component {
     this.addressSearch = this.addressSearch.bind(this)
   }
 
-  addressSearch(event) {
-    const zipcode = event.target.value;
+  addressSearch(zipcode) {
+    console.log('addressSearch invoked')
+    // const zipcode = event.target.value;
     if ((!zipcode) || zipcode.length < 5 || Number(zipcode) === NaN) return;
     const reqBody = {
       address: zipcode
     }
-    fetch('/officals', {
+    console.log(JSON.stringify(reqBody))
+    console.log(zipcode)
+    fetch(`/officials?address=${zipcode}`, {
       method: 'POST',
       header: {
         'content-type': 'application/json'
-      },
-      body: JSON.stringify(reqBody)
+      }
     })
       .then((response) => response.json())
       .then((officialsData) => {
@@ -39,27 +41,25 @@ class Container extends Component {
           data: []
         })
       })
+  }
 
 
-    render() {
-      // conditional check if we have 
-      if (this.state.data) {
-        return (
-          <div>
-            {/* // display rendered here */}
-            <Display officials={this.state.data} />
-          </div>
-        )
-        //do something with data
-      } else {
-        //if we dont' have data render home
-        return (
-          <div>
-            <Home className='home' addressSearch={this.addressSearch} />
-          </div>
-        )
-      }
+
+
+
+
+  render() {
+    const data = []
+    if (this.state.data.length) {
+      data.push(<Display officials={this.state.data} />)
+    } else {
+      data.push(<Home className='home' addressSearch={this.addressSearch} />)
     }
+    return (
+      <div>
+        {data}
+      </div>
+    )
   }
 }
 

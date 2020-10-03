@@ -4,6 +4,9 @@ import { render } from 'react-dom';
 class Home extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      address: "",
+    }
   }
 
 
@@ -24,20 +27,23 @@ class Home extends Component {
 
   //render method will render header, form, and button and functionality will be added as attirutes in renderings
   render() {
+    // console.log(this.props)
     return (
       <div>
         <header className="header"><h1>Who's On The Ballot?</h1></header>
-        <form className="inputForm">
-          <input
-            id="addressInput"
-            placeholder="Enter your address here"
-            type='text'
-          />
-          <button onClick={this.props.addressSearch}>
-            {/* <button onClick={this.props.addressSearch}> */}
+        {/* <form className="inputForm"> */}
+        <input
+          id="addressInput"
+          placeholder="Enter your address here"
+          type='text'
+          onChange={(e) => this.setState({ address: e.target.value })}
+        />
+        {/* {console.log('right before this.props.addressSearch')} */}
+        <button onClick={(e) => this.props.addressSearch(this.state.address)}>
+          {/* <button onClick={this.props.addressSearch}> */}
               Search
             </button>
-        </form>
+        {/* </form> */}
       </div >
     )
 
