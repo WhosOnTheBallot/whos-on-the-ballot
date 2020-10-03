@@ -2,16 +2,12 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 
 class Home extends Component {
-  constructor() {
-    super();
-    this.state = {}
-    this.addressSearch = this.addressSearch.bind(this)
+  constructor(props) {
+    super(props);
   }
 
   //functionality for input field and button
-  addressSearch(event) {
-    const address = event.target.value;
-    console.log(address);
+
     // send this data to our API and potentially get info back  
     // send a request to /data endpoint with a JSON object 
     // { address: address}
@@ -19,8 +15,6 @@ class Home extends Component {
     // send the  JSON object
     // use .thens and harness the data that is returned
     // use the data in some way
-
-  }
 
   //render method will render header, form, and button and functionality will be added as attirutes in renderings
   render() {
@@ -35,7 +29,7 @@ class Home extends Component {
               type='text'
 
             ></input>
-            <button onClick={(e) => addressSearch(e)}>
+            <button onClick={(event) => this.addressSearch(event)}>
               Search
             </button>
           </form>
