@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const officialsController = require('./officialsController.js');
+
 const PORT = 3000;
 
 const app = express();
@@ -13,8 +14,17 @@ app.get('/', (req, res) => {
 });
 
 // Handle route to /election using electionController middleware
-app.post('/officials', officialsController.getOfficials, (req, res) => {
-  res.status(200).json(res.locals.officialsData);
+app.post(
+  '/officials',
+  officialsController.getOfficials,
+  officialsController.getNews,
+  (req, res) => {
+    res.status(200).json(res.locals.officialsData);
+  }
+);
+
+app.get('/news', officialsController.getNews, (req, res) => {
+  res.sendStatus(200);
 });
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

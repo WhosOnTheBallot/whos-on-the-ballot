@@ -1,9 +1,12 @@
 const express = require('express');
 const axios = require('axios');
 
+const NewsAPI = require('newsapi');
+
 require('dotenv').config(); // Load variables into process.env from our .env file
 
-const API_KEY = process.env.API_KEY; // Grab our API_KEY from the .env file
+const { API_KEY } = process.env; // Grab our API_KEY from the .env file
+const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
 const formatOfficialsData = (officialsObject) => {
   // Grab the "offices" array which contains information about each title, such as
@@ -51,6 +54,38 @@ officialsController.getOfficials = (req, res, next) => {
       next();
     })
     .catch((err) => next(err));
+};
+
+officialsController.getNews = (req, res, next) => {
+  console.log('in get news');
+
+  const getNewsForRep = async (arr, idx) => {
+    if (idx === arr.length) return next();
+
+    const rep = arr[idx];
+    rep.articles = [];
+
+    await newsapi.v2
+      .topHeadlines({
+        q: rep.name,
+        language: 'en',
+        country: 'us',
+      })
+      .then((response) => {
+        response.articles.forEach((article) => {
+          rep.articles.push(article.url);
+        });
+        getNewsForRep(arr, idx + 1);
+      });
+  };
+
+  getNewsForRep(res.locals.officialsData, 0);
+
+  // res.locals.officialsData.forEach((official) => {
+  //   console.log('in for each');
+  //   official.articles = [];
+  //   // async issue, forEach finishes before get requests are over
+  // });
 };
 
 module.exports = officialsController;
