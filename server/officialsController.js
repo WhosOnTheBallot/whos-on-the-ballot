@@ -44,10 +44,9 @@ const officialsController = {};
 officialsController.getOfficials = (req, res, next) => {
   console.log('before axios get req')
   console.log(API_KEY)
-  console.log(req.params)
   axios
     .get(
-      `https://www.googleapis.com/civicinfo/v2/representatives?key=${API_KEY}&address=${req.params.address}`
+      `https://www.googleapis.com/civicinfo/v2/representatives?key=${API_KEY}&address=${req.body.address}`
     )
     .then((result) => {
       console.log('received axios get req')

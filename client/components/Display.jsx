@@ -4,9 +4,9 @@ import Card from './Card.jsx'
 
 
 const Display = (props) => {
-
+  console.log('in display component props', props.officials[0])
   const cards = props.officials.map((el, index) => {
-    <Card official={props.officials[index]} />
+    return <Card official={props.officials[index]} />
   })
   return (
     <div>

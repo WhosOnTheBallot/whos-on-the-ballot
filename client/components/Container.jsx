@@ -22,14 +22,16 @@ class Container extends Component {
     }
     console.log(JSON.stringify(reqBody))
     console.log(zipcode)
-    fetch(`/officials?address=${zipcode}`, {
+    fetch(`/officials`, {
       method: 'POST',
-      header: {
+      headers: {
         'content-type': 'application/json'
-      }
+      },
+      body: JSON.stringify(reqBody)
     })
       .then((response) => response.json())
       .then((officialsData) => {
+        console.log(officialsData)
         this.setState({
           ...this.state,
           data: officialsData
