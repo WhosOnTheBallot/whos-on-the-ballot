@@ -37,7 +37,7 @@ class Home extends Component {
         </form>
       </div>
     )
-    )
+
   }
 }
 
