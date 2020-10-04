@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+$btn-bgd: rgb(226, 226, 226);
+$btn-txt: rgb(24, 24, 24);
+$dark-bgd: #555;
+
+* {
+  font-family: 'Lato', sans-serif;
+}
+
+// This is basically a "function" to center divs. Helps the code be more DRY
+@mixin flexCenter() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  @include flexCenter();
+  min-height: 100vh;
+}
+
+#outer-container {
+  height: 100%;
+}
+
+#inner-container {
+  height: 100%;
+}
+
+#home-container {
+  // Similar to "invoking" flexCenter "function"
+  @include flexCenter();
+  height: 100%;
+}
+
+// HOMEPAGE STYLING
+
+.header {
+  color: #222;
+}
+
+#addressInput {
+  border-radius: 30px;
+  height: 25px;
+  width: 200px;
+  border: 1px solid $dark-bgd;
+  text-align: center;
+
+  &::placeholder {
+    text-align: center;
+  }
+}
+
+#search-btn {
+  margin-top: 13px;
+
+  height: 25px;
+  width: 70px;
+
+  border-radius: 8px;
+  border: none;
+
+  background-color: $btn-bgd;
+  color: $btn-txt;
+
+  box-shadow: 1px 1px 1px $btn-txt;
+}
+
+// CARDS DISPLAY STYLING
+#card-container {
+  @include flexCenter();
+}
+
+.card {
+  position: relative;
+  border: 1px solid $dark-bgd;
+  border-radius: 5px 0px 5px 5px;
+
+  padding-left: 7px;
+  margin-bottom: 15px;
+
+  height: 100px;
+  width: 200px;
+}
+
+.officerName {
+  font-weight: bold;
+  // color: blue;
+}
+
+.officerPhoto {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.officerTitle {
+  // position: absolute;
+  // bottom: 30px;
+  font-size: 9px;
+}
+
+.officerParty {
+  // position: absolute;
+  // bottom: 0px;
+  // font-weight: normal;
+  font-size: 9px;
+}
