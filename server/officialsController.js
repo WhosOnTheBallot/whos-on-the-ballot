@@ -83,7 +83,7 @@ officialsController.getNews = (req, res, next) => {
         let articleIdx = Math.floor(Math.random() * length);
 
         // If we have an empty array, articleIdx would be 0 and we would try to access an idx
-        // that doesn't exist, so we need to when for that
+        // that doesn't exist, so we need to account for that
         if (length !== 0) {
           while (i < 3) {
             rep.articles.push(articles[articleIdx].url);
