@@ -18,7 +18,7 @@ $dark-bgd: #555;
 
 #root {
   @include flexCenter();
-  min-height: 100vh;
+  min-height: 98vh;
 }
 
 #outer-container {
@@ -39,25 +39,34 @@ $dark-bgd: #555;
 
 .header {
   color: #222;
+  font-size: 30px;
 }
 
 #addressInput {
   border-radius: 30px;
-  height: 25px;
-  width: 200px;
+  height: 35px;
+  width: 250px;
   border: 1px solid $dark-bgd;
   text-align: center;
+  padding-top: 3px;
 
   &::placeholder {
+    // margin-top: 0px;
+    // @include flexCenter();
+    // position: relative;
+    // bottom: 0;
     text-align: center;
+    font-size: 18px;
   }
 }
 
 #search-btn {
-  margin-top: 13px;
+  margin-top: 20px;
 
-  height: 25px;
-  width: 70px;
+  height: 35px;
+  width: 80px;
+
+  font-size: 19px;
 
   border-radius: 8px;
   border: none;
@@ -73,17 +82,23 @@ $dark-bgd: #555;
   @include flexCenter();
 }
 
-.card {
-  position: relative;
-  border: 1px solid $dark-bgd;
-  border-radius: 5px 0px 5px 5px;
+// # card-container {
+//   display: grid;
+//   grid: repeat(2, 60px) / auto-flow 80px;
+// }
 
-  padding-left: 7px;
-  margin-bottom: 15px;
+// # card-container >
+// }
+//   position: relative;
+//   border: 1px solid $dark-bgd;
+//   border-radius: 5px 0px 5px 5px;
 
-  height: 100px;
-  width: 200px;
-}
+//   padding-left: 7px;
+//   margin-bottom: 15px;
+
+//   height: 100px;
+//   width: 200px;
+// }
 
 .officerName {
   font-weight: bold;

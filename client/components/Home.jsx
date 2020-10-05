@@ -30,7 +30,7 @@ class Home extends Component {
         {/* <form className="inputForm"> */}
         <input
           id="addressInput"
-          placeholder="Enter your address here"
+          placeholder="Enter your zipcode here"
           type="text"
           onChange={(e) => this.setState({ address: e.target.value })}
         />
