@@ -18,11 +18,15 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../index.html'));
 });
 
-// Handle route to /election using electionController middleware
-app.post('/officials', officialsController.getOfficials, (req, res) => {
-  console.log('last middleware in officials endpoint');
-  res.status(200).json(res.locals.officialsData);
-});
+// Handle route to /officials using officialsController middleware
+app.post(
+  '/officials',
+  officialsController.getOfficials,
+  officialsController.getNews,
+  (req, res) => {
+    res.status(200).json(res.locals.officialsData);
+  }
+);
 
 // Upon clicking the "Login with Google" button, users will be redirected to /auth/google
 // At this point, we want to make our initial authentication request to Google. This is the
