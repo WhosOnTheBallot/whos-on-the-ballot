@@ -14,14 +14,11 @@ class Container extends Component {
   }
 
   addressSearch(zipcode) {
-    console.log('addressSearch invoked');
     // const zipcode = event.target.value;
     if (!zipcode || zipcode.length < 5 || Number(zipcode) === NaN) return;
     const reqBody = {
       address: zipcode,
     };
-    console.log(JSON.stringify(reqBody));
-    console.log(zipcode);
     fetch(`/officials`, {
       method: 'POST',
       headers: {
@@ -31,14 +28,12 @@ class Container extends Component {
     })
       .then((response) => response.json())
       .then((officialsData) => {
-        console.log(officialsData);
         this.setState({
           ...this.state,
           data: officialsData,
         });
       })
       .catch((err) => {
-        console.log('error:', err);
         this.setState({
           data: [],
         });
