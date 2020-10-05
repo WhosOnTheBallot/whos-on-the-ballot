@@ -7,7 +7,7 @@ class Container extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      data: []
     };
 
     this.addressSearch = this.addressSearch.bind(this);
@@ -17,25 +17,25 @@ class Container extends Component {
     // const zipcode = event.target.value;
     if (!zipcode || zipcode.length < 5 || Number(zipcode) === NaN) return;
     const reqBody = {
-      address: zipcode,
+      address: zipcode
     };
     fetch(`/officials`, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json',
+        'content-type': 'application/json'
       },
-      body: JSON.stringify(reqBody),
+      body: JSON.stringify(reqBody)
     })
       .then((response) => response.json())
       .then((officialsData) => {
         this.setState({
           ...this.state,
-          data: officialsData,
+          data: officialsData
         });
       })
       .catch((err) => {
         this.setState({
-          data: [],
+          data: []
         });
       });
   }

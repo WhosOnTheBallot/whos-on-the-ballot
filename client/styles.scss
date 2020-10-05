@@ -17,6 +17,7 @@ $dark-bgd: #555;
 }
 
 #root {
+  // Similar to "invoking" flexCenter "function"
   @include flexCenter();
   min-height: 98vh;
 }
@@ -42,13 +43,37 @@ $dark-bgd: #555;
   font-size: 30px;
 }
 
+.whos {
+  transition: 0.5s;
+  &:hover {
+    color: red;
+  }
+}
+
+.onThe {
+  transition: 0.5s;
+  &:hover {
+    color: rgb(221, 216, 216);
+  }
+}
+
+.ballot {
+  transition: 0.5s;
+  &:hover {
+    color: blue;
+  }
+}
 #addressInput {
+  transition: 500ms;
+
   border-radius: 30px;
   height: 35px;
   width: 250px;
   border: 1px solid $dark-bgd;
   text-align: center;
   padding-top: 3px;
+
+  font-size: 18px;
 
   &::placeholder {
     // margin-top: 0px;
@@ -58,9 +83,18 @@ $dark-bgd: #555;
     text-align: center;
     font-size: 18px;
   }
+
+  &:hover {
+    box-shadow: 2px 2px 1px 1px $dark-bgd;
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 #search-btn {
+  transition: 500ms;
   margin-top: 20px;
 
   height: 35px;
@@ -75,14 +109,26 @@ $dark-bgd: #555;
   color: $btn-txt;
 
   box-shadow: 1px 1px 1px $btn-txt;
+
+  &:hover {
+    box-shadow: 3px 3px 3px $btn-txt;
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 // CARDS DISPLAY STYLING
 #card-container {
-  @include flexCenter();
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  flex: 1;
 }
 
 .card {
+  transition: 500ms;
   position: relative;
   border: 1px solid $dark-bgd;
   border-radius: 5px 0px 5px 5px;
@@ -90,8 +136,13 @@ $dark-bgd: #555;
   padding-left: 7px;
   margin-bottom: 15px;
 
-  height: 100px;
-  width: 200px;
+  height: 200px;
+  width: 250px;
+  box-shadow: 3px 2px 1px 1px darkgrey;
+
+  &:hover {
+    box-shadow: 6px 4px 1px 1px darkgrey;
+  }
 }
 
 // # card-container {
@@ -137,4 +188,93 @@ $dark-bgd: #555;
   // bottom: 0px;
   // font-weight: normal;
   font-size: 9px;
+}
+
+.login {
+  color: white;
+  width: 500px;
+  padding: 60px;
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
+  background: none;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 5px 10px 20px #888888;
+}
+
+.login h1 {
+  color: $btn-txt;
+}
+
+#login-btn {
+  font-size: 15px;
+  color: grey;
+  border: 0;
+  display: block;
+  margin: 24px auto;
+  text-align: center;
+  border: 1.5px solid black;
+  padding: 10px;
+  width: 175px;
+  outline: none;
+  border-radius: 28px;
+  transition: 0.35s;
+  &:hover {
+    box-shadow: 3px 3px 3px $btn-txt;
+    color: rgb(15, 20, 30);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// #login-btn {
+//   background-color: #3e8e41;
+//   box-shadow: 0 5px #666;
+//   transform: translateY(4px);
+// }
+
+#login-btn {
+  width: 200px;
+  border-color: rgb(9, 62, 91);
+}
+
+.articleLinksContainer {
+}
+
+.articleLinks {
+  color: whitesmoke;
+  text-decoration: none;
+  &:hover {
+    color: lightblue;
+    text-decoration: underline;
+  }
+}
+
+.republican {
+  background-color: rgba(216, 69, 52, 0.6);
+  color: whitesmoke;
+}
+
+.democrat {
+  background-color: rgba(49, 100, 211, 0.762);
+  color: whitesmoke;
+}
+
+.otherParty {
+  background-color: lavender;
+}
+
+#displayTitle {
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+.display {
+  // Similar to "invoking" flexCenter "function"
+  @include flexCenter();
+  //change font size
 }
