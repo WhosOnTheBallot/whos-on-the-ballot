@@ -43,22 +43,6 @@ $dark-bgd: #555;
   font-size: 30px;
 }
 
-.header:hover {
-  transition: 1s;
-  color: linear-gradient(
-    to bottom,
-    #f73e31 22%,
-    #ffffff 51%,
-    #2989d8 100%,
-    #7db9e8 100%,
-    #2989d8 100%
-  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-}
-
-#title {
-  transition: 0.5s;
-}
-
 .whos {
   transition: 0.5s;
   &:hover {
@@ -210,10 +194,10 @@ $dark-bgd: #555;
   color: white;
   width: 500px;
   padding: 60px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
   background: none;
   text-align: center;
   border-radius: 20px;
