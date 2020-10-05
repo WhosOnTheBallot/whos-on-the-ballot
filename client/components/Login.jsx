@@ -8,23 +8,19 @@ import { render } from 'react-dom';
 // some other stuff potentially
 
 class Login extends Component {
-  //will this have state?
-
-
-  
-
-
-  render()
+  render() {
     return (
-      //login button
-      <div id="login-container">
-        <header>
-          <h1>Login With</h1>
-        
-        </header>
+      <div>
+        <h1>Who's On The Ballot</h1>
+        <button
+          id="login-btn"
+          onClick={(event) => (window.location.href = '/auth/google')}
+        >
+          Login With Google
+        </button>
       </div>
-
-    )
+    );
+  }
 }
 
-export default Login
+export default Login;

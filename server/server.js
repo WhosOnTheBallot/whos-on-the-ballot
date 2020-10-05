@@ -40,7 +40,10 @@ app.get(
   '/auth/google/redirect',
   passport.authenticate('google'),
   (req, res) => {
-    res.send('oauth complete');
+    // res.json({ success: true });
+    // res.redirect('/');
+    res.cookie('loggedIn', 'true');
+    res.sendFile(path.resolve(__dirname, '../index.html'));
   }
 );
 
