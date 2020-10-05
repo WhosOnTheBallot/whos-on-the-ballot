@@ -5,7 +5,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: '',
+      address: ''
     };
   }
 
@@ -14,7 +14,11 @@ class Home extends Component {
     return (
       <div id="home-container">
         <header className="header">
-          <h1>Who's On The Ballot?</h1>
+          <h1 id="title">
+            <span className="whos">Who's</span>
+            <span className="onThe"> on the</span>
+            <span className="ballot"> Ballot?</span>
+          </h1>
         </header>
         <input
           id="addressInput"
@@ -22,10 +26,7 @@ class Home extends Component {
           type="text"
           onChange={(e) => this.setState({ address: e.target.value })}
         />
-        <button
-          id="search-btn"
-          onClick={(e) => this.props.addressSearch(this.state.address)}
-        >
+        <button id="search-btn" onClick={(e) => this.props.addressSearch(this.state.address)}>
           Search
         </button>
       </div>
