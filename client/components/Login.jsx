@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-/* eslint-disable */
-
-// title
-// Login with Google
-// some other stuff potentially
-
 class Login extends Component {
   render() {
     return (

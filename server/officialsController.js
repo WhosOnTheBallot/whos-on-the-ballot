@@ -3,7 +3,7 @@ const axios = require('axios');
 
 require('dotenv').config(); // Load variables into process.env from our .env file
 
-const API_KEY = process.env.API_KEY; // Grab our API_KEY from the .env file
+const { API_KEY } = process.env; // Grab our API_KEY from the .env file
 
 const formatOfficialsData = (officialsObject) => {
   // Grab the "offices" array which contains information about each title, such as
@@ -42,16 +42,12 @@ const formatOfficialsData = (officialsObject) => {
 const officialsController = {};
 
 officialsController.getOfficials = (req, res, next) => {
-  console.log('before axios get req')
-  console.log(API_KEY)
   axios
     .get(
       `https://www.googleapis.com/civicinfo/v2/representatives?key=${API_KEY}&address=${req.body.address}`
     )
     .then((result) => {
-      console.log('received axios get req')
       res.locals.officialsData = formatOfficialsData(result.data);
-      console.log('finished formatOfficialsData invocation')
       next();
     })
     .catch((err) => next(err));
