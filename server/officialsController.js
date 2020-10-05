@@ -39,8 +39,7 @@ const formatOfficialsData = (officialsObject) => {
     });
   });
 
-  // return officials.reverse();
-  return officials;
+  return officials.reverse();
 };
 
 const officialsController = {};
