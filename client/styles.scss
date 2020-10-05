@@ -82,6 +82,18 @@ $dark-bgd: #555;
   @include flexCenter();
 }
 
+.card {
+  position: relative;
+  border: 1px solid $dark-bgd;
+  border-radius: 5px 0px 5px 5px;
+
+  padding-left: 7px;
+  margin-bottom: 15px;
+
+  height: 100px;
+  width: 200px;
+}
+
 // # card-container {
 //   display: grid;
 //   grid: repeat(2, 60px) / auto-flow 80px;
