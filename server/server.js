@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../index.html'));
 });
 
-// Handle route to /election using electionController middleware
+// Handle route to /officials using officialsController middleware
 app.post(
   '/officials',
   officialsController.getOfficials,
@@ -22,10 +22,6 @@ app.post(
     res.status(200).json(res.locals.officialsData);
   }
 );
-
-app.get('/news', officialsController.getNews, (req, res) => {
-  res.sendStatus(200);
-});
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 

@@ -58,9 +58,7 @@ officialsController.getOfficials = (req, res, next) => {
 };
 
 officialsController.getNews = (req, res, next) => {
-  console.log('in get news');
-
-  const getNewsForRep = async (arr, idx) => {
+  const getNewsForRep = (arr, idx) => {
     if (idx === arr.length) {
       return next();
     }
@@ -68,33 +66,41 @@ officialsController.getNews = (req, res, next) => {
     const rep = arr[idx];
     rep.articles = [];
 
-    await newsapi.v2
+    // Make a query to the newsapi to grab information about the current representative
+    newsapi.v2
       .everything({
-        q: rep.name,
+        q: `${rep.name} ${rep.office}`,
         language: 'en',
+        sources:
+          'cbs-news,associated-press,abc-news,bbc-news,bloomberg,business-insider,cnn,fortune,fox-news,google-news,msnbc,nbc-news,national-review,newsweek,the-wallstreet-journal,the-american-conservative,the-washington-post,time,usa-today,ny-times,the-washington-times,new-york-magazine',
       })
       .then((response) => {
-        for (let i = 0; i < 3; i += 1) {
-          if (response.articles[i]) {
-            rep.articles.push(response.articles[i].url);
+        const { articles } = response;
+        const { length } = articles;
+
+        // We want to grab random articles out from what we are given. Otherwise, we'll primarily
+        // be grabbing from the first "source" listed in our query
+        let i = 0;
+        let articleIdx = Math.floor(Math.random() * length);
+
+        // If we have an empty array, articleIdx would be 0 and we would try to access an idx
+        // that doesn't exist, so we need to when for that
+        if (length !== 0) {
+          while (i < 3) {
+            rep.articles.push(articles[articleIdx].url);
+            articleIdx = Math.floor(Math.random() * length);
+            i += 1;
           }
         }
 
-        // response.articles.forEach((article) => {
-        //   // console.log(article);
-        // });
-        // rep.articles = rep.articles(slice(3))
         getNewsForRep(arr, idx + 1);
       });
   };
 
+  // We chose a recursive approach because we are making asynchronous calls. So, if we used a loop,
+  // then we move onto the next iteration before the current iteration has received its data.
+  // This way, we can only move on to the next element when the current element has finished
   getNewsForRep(res.locals.officialsData, 0);
-
-  // res.locals.officialsData.forEach((official) => {
-  //   console.log('in for each');
-  //   official.articles = [];
-  //   // async issue, forEach finishes before get requests are over
-  // });
 };
 
 module.exports = officialsController;
