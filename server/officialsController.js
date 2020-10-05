@@ -39,7 +39,8 @@ const formatOfficialsData = (officialsObject) => {
     });
   });
 
-  return officials.reverse();
+  // return officials.reverse();
+  return officials;
 };
 
 const officialsController = {};
@@ -60,21 +61,29 @@ officialsController.getNews = (req, res, next) => {
   console.log('in get news');
 
   const getNewsForRep = async (arr, idx) => {
-    if (idx === arr.length) return next();
+    if (idx === arr.length) {
+      return next();
+    }
 
     const rep = arr[idx];
     rep.articles = [];
 
     await newsapi.v2
-      .topHeadlines({
+      .everything({
         q: rep.name,
         language: 'en',
-        country: 'us',
       })
       .then((response) => {
-        response.articles.forEach((article) => {
-          rep.articles.push(article.url);
-        });
+        for (let i = 0; i < 3; i += 1) {
+          if (response.articles[i]) {
+            rep.articles.push(response.articles[i].url);
+          }
+        }
+
+        // response.articles.forEach((article) => {
+        //   // console.log(article);
+        // });
+        // rep.articles = rep.articles(slice(3))
         getNewsForRep(arr, idx + 1);
       });
   };
