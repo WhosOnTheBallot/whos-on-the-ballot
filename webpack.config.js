@@ -15,13 +15,13 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
+            presets: [ '@babel/preset-env', '@babel/preset-react' ]
           }
         }
       },
       {
         test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [ 'style-loader', 'css-loader', 'sass-loader' ]
       }
     ]
   },
@@ -29,6 +29,6 @@ module.exports = {
     publicPath: 'http://localhost:8080/build/',
     proxy: {
       '/': 'http://localhost:3000'
-    },
+    }
   }
 };

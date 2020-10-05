@@ -9,15 +9,15 @@ class Home extends Component {
     };
   }
 
-  //render method will render header, form, and button and functionality will be added as attirutes in renderings
+  //render method will render header, form, and button and functionality will be added as attributes in renderings
   render() {
     return (
       <div id="home-container">
         <header className="header">
           <h1 id="title">
-            <span className="whos">Who's</span>
-            <span className="onThe"> on the</span>
-            <span className="ballot"> Ballot?</span>
+            <span className="whos">Your</span>
+            <span className="onThe"> Local</span>
+            <span className="ballot"> Officials</span>
           </h1>
         </header>
         <input

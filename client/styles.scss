@@ -141,7 +141,8 @@ $dark-bgd: #555;
   box-shadow: 3px 2px 1px 1px darkgrey;
 
   &:hover {
-    box-shadow: 6px 4px 1px 1px darkgrey;
+    border: 3px solid $dark-bgd;
+    box-shadow: 8px 6px 3px 3px darkgrey;
   }
 }
 
