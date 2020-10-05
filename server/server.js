@@ -43,7 +43,8 @@ app.get(
     // res.json({ success: true });
     // res.redirect('/');
     res.cookie('loggedIn', 'true');
-    res.sendFile(path.resolve(__dirname, '../index.html'));
+    // res.sendFile(path.resolve(__dirname, '../index.html'));
+    res.redirect('/');
   }
 );
 

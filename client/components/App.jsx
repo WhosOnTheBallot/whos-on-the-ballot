@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Container from './Container.jsx';
 import Login from './Login.jsx';
-import Cookies from 'universal-cookie';
 
+// Grab our cookies
+import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 class App extends Component {
@@ -12,15 +13,6 @@ class App extends Component {
     this.state = {
       loggedIn: cookies.get('loggedIn') ? true : false,
     };
-  }
-
-  componentDidUpdate() {
-    console.log('hello!');
-    if (cookies.get('loggedIn')) {
-      this.setState({
-        loggedIn: cookies.get('loggedIn'),
-      });
-    }
   }
 
   render() {
