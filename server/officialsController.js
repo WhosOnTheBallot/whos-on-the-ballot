@@ -3,7 +3,7 @@ const axios = require('axios');
 
 require('dotenv').config(); // Load variables into process.env from our .env file
 
-const API_KEY = process.env.API_KEY; // Grab our API_KEY from the .env file
+const { API_KEY } = process.env; // Grab our API_KEY from the .env file
 
 const formatOfficialsData = (officialsObject) => {
   // Grab the "offices" array which contains information about each title, such as

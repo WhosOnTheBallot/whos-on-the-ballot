@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: './client/index.js',
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'build/'),
     filename: 'bundle.js'
   },
   mode: process.env.NODE_ENV,
@@ -15,20 +15,20 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [ '@babel/preset-env', '@babel/preset-react' ]
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+        use: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },
   devServer: {
-    publicPath: '/build/',
+    publicPath: 'http://localhost:8080/build/',
     proxy: {
       '/': 'http://localhost:3000'
-    }
+    },
   }
 };

@@ -22,9 +22,13 @@
     "axios": "^0.20.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "sass": "^1.26.11",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "sass-loader": "^10.0.2",

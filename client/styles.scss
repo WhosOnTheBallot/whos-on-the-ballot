@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+$btn-bgd: rgb(226, 226, 226);
+$btn-txt: rgb(24, 24, 24);
+$dark-bgd: #555;
+
+* {
+  font-family: 'Lato', sans-serif;
+}
+
+// This is basically a "function" to center divs. Helps the code be more DRY
+@mixin flexCenter() {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  @include flexCenter();
+  min-height: 98vh;
+}
+
+#outer-container {
+  height: 100%;
+}
+
+#inner-container {
+  height: 100%;
+}
+
+#home-container {
+  // Similar to "invoking" flexCenter "function"
+  @include flexCenter();
+  height: 100%;
+}
+
+// HOMEPAGE STYLING
+
+.header {
+  color: #222;
+  font-size: 30px;
+}
+
+#addressInput {
+  border-radius: 30px;
+  height: 35px;
+  width: 250px;
+  border: 1px solid $dark-bgd;
+  text-align: center;
+  padding-top: 3px;
+
+  &::placeholder {
+    // margin-top: 0px;
+    // @include flexCenter();
+    // position: relative;
+    // bottom: 0;
+    text-align: center;
+    font-size: 18px;
+  }
+}
+
+#search-btn {
+  margin-top: 20px;
+
+  height: 35px;
+  width: 80px;
+
+  font-size: 19px;
+
+  border-radius: 8px;
+  border: none;
+
+  background-color: $btn-bgd;
+  color: $btn-txt;
+
+  box-shadow: 1px 1px 1px $btn-txt;
+}
+
+// CARDS DISPLAY STYLING
+#card-container {
+  @include flexCenter();
+}
+
+.card {
+  position: relative;
+  border: 1px solid $dark-bgd;
+  border-radius: 5px 0px 5px 5px;
+
+  padding-left: 7px;
+  margin-bottom: 15px;
+
+  height: 100px;
+  width: 200px;
+}
+
+// # card-container {
+//   display: grid;
+//   grid: repeat(2, 60px) / auto-flow 80px;
+// }
+
+// # card-container >
+// }
+//   position: relative;
+//   border: 1px solid $dark-bgd;
+//   border-radius: 5px 0px 5px 5px;
+
+//   padding-left: 7px;
+//   margin-bottom: 15px;
+
+//   height: 100px;
+//   width: 200px;
+// }
+
+.officerName {
+  font-weight: bold;
+  // color: blue;
+}
+
+.officerPhoto {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+
+  height: 75px;
+  width: 60px;
+}
+
+.officerTitle {
+  // position: absolute;
+  // bottom: 30px;
+  font-size: 9px;
+}
+
+.officerParty {
+  // position: absolute;
+  // bottom: 0px;
+  // font-weight: normal;
+  font-size: 9px;
+}
