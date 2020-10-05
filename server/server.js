@@ -18,15 +18,15 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../index.html'));
 });
 
+// Respond with index.html file when user signs in
+app.get('/search', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../index.html'));
+});
+
 // Handle route to /officials using officialsController middleware
-app.post(
-  '/officials',
-  officialsController.getOfficials,
-  officialsController.getNews,
-  (req, res) => {
-    res.status(200).json(res.locals.officialsData);
-  }
-);
+app.post('/officials', officialsController.getOfficials, officialsController.getNews, (req, res) => {
+  res.status(200).json(res.locals.officialsData);
+});
 
 // Upon clicking the "Login with Google" button, users will be redirected to /auth/google
 // At this point, we want to make our initial authentication request to Google. This is the
@@ -34,23 +34,15 @@ app.post(
 app.get(
   '/auth/google',
   passport.authenticate('google', {
-    scope: ['profile'],
+    scope: [ 'profile' ]
   })
 );
 
 // This is the 2nd request we will make to Google. After the user has given us permissions and we
 // received a code from Google, we will make a 2nd request to actually get the user's info
-app.get(
-  '/auth/google/redirect',
-  passport.authenticate('google'),
-  (req, res) => {
-    // res.json({ success: true });
-    // res.redirect('/');
-    res.cookie('loggedIn', 'true');
-    // res.sendFile(path.resolve(__dirname, '../index.html'));
-    res.redirect('/');
-  }
-);
+app.get('/auth/google/redirect', passport.authenticate('google'), (req, res) => {
+  res.redirect('/search');
+});
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 

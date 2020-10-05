@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Home from './Home.jsx';
 import Display from './Display.jsx';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 class Container extends Component {
   constructor(props) {
@@ -14,7 +15,6 @@ class Container extends Component {
   }
 
   addressSearch(zipcode) {
-    // const zipcode = event.target.value;
     if (!zipcode || zipcode.length < 5 || Number(zipcode) === NaN) return;
     const reqBody = {
       address: zipcode
@@ -41,13 +41,18 @@ class Container extends Component {
   }
 
   render() {
-    const data = [];
-    if (this.state.data.length) {
-      data.push(<Display officials={this.state.data} />);
-    } else {
-      data.push(<Home className="home" addressSearch={this.addressSearch} />);
-    }
-    return <div id="inner-container">{data}</div>;
+    const itemToRender = this.state.data.length ? (
+      <Display officials={this.state.data} />
+    ) : (
+      <Home className="home" addressSearch={this.addressSearch} />
+    );
+    // let itemToRender;
+    // if (this.state.data.length) {
+    //   itemToRender = <Display officials={this.state.data} />;
+    // } else {
+    //   itemToRender = <Home className="home" addressSearch={this.addressSearch} />;
+    // }
+    return <div id="inner-container">{itemToRender}</div>;
   }
 }
 
