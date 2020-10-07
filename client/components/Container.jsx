@@ -1,16 +1,18 @@
 import React, { Component, useState } from "react";
 import { render } from "react-dom";
-import Home from "./Home.jsx";
-import Display from "./Display.jsx";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useQuery } from "react-query";
 const axios = require("axios");
+import Home from "./Home.jsx";
+import Display from "./Display.jsx";
+import Card from "./Card.jsx";
 
 const API_KEY = "AIzaSyCLtsQE_ZZgnVpGOaCGFTH26EJ0QH2fPIM";
 
 const Container = () => {
   const [officials, setOfficials] = useState([]);
 
+  // Call to Google Civics API
   const fetchOfficials = async () => {
     const result = await axios
       .get(`https://www.googleapis.com/civicinfo/v2/representatives?key=${API_KEY}&address=75078`)
@@ -21,19 +23,15 @@ const Container = () => {
 
   const { isLoading, error, data } = useQuery("officials", fetchOfficials);
 
-  console.log(data);
-
   return isLoading ? (
     "...Loading"
   ) : error ? (
     error.message
   ) : (
-    <div>
-      <ul>
-        {data.map((official) => {
-          return <li key={official.name}>{official.name}</li>;
-        })}
-      </ul>
+    <div className='container'>
+      {data.map((official) => {
+        return <Card key={official.name} official={official} />;
+      })}
     </div>
   );
 
