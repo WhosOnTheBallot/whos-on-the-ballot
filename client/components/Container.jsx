@@ -1,59 +1,37 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import Home from './Home.jsx';
-import Display from './Display.jsx';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useState } from "react";
+import { useQuery } from "react-query";
+const axios = require("axios");
+import Card from "./Card.jsx";
 
-class Container extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: []
-    };
+const API_KEY = "AIzaSyCLtsQE_ZZgnVpGOaCGFTH26EJ0QH2fPIM";
 
-    this.addressSearch = this.addressSearch.bind(this);
-  }
+const Container = () => {
+  const [officials, setOfficials] = useState([]);
 
-  addressSearch(zipcode) {
-    if (!zipcode || zipcode.length < 5 || Number(zipcode) === NaN) return;
-    const reqBody = {
-      address: zipcode
-    };
-    fetch(`/officials`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(reqBody)
-    })
-      .then((response) => response.json())
-      .then((officialsData) => {
-        this.setState({
-          ...this.state,
-          data: officialsData
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          data: []
-        });
-      });
-  }
+  // Call to Google Civics API
+  const fetchOfficials = async () => {
+    const result = await axios
+      .get(`https://www.googleapis.com/civicinfo/v2/representatives?key=${API_KEY}&address=75078`)
+      .then((res) => res.data.officials);
+    setOfficials(result);
+    return result;
+  };
 
-  render() {
-    const itemToRender = this.state.data.length ? (
-      <Display officials={this.state.data} />
-    ) : (
-      <Home className="home" addressSearch={this.addressSearch} />
-    );
-    // let itemToRender;
-    // if (this.state.data.length) {
-    //   itemToRender = <Display officials={this.state.data} />;
-    // } else {
-    //   itemToRender = <Home className="home" addressSearch={this.addressSearch} />;
-    // }
-    return <div id="inner-container">{itemToRender}</div>;
-  }
-}
+  const { isLoading, error, data } = useQuery("officials", fetchOfficials, {
+    refetchOnWindowFocus: false,
+  });
+
+  return isLoading ? (
+    "...Loading"
+  ) : error ? (
+    error.message
+  ) : (
+    <div className='container'>
+      {data.map((official) => {
+        return <Card key={official.name} official={official} />;
+      })}
+    </div>
+  );
+};
 
 export default Container;
