@@ -4,7 +4,7 @@ module.exports = {
   entry: './client/index.js',
   output: {
     path: path.resolve(__dirname, 'build/'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   mode: process.env.NODE_ENV,
   module: {
@@ -15,20 +15,24 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [ '@babel/preset-env', '@babel/preset-react' ]
-          }
-        }
+            presets: ['@babel/env', '@babel/react'],
+            plugins: [
+              '@babel/plugin-transform-runtime',
+              '@babel/transform-async-to-generator',
+            ],
+          },
+        },
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [ 'style-loader', 'css-loader', 'sass-loader' ]
-      }
-    ]
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
   },
   devServer: {
     publicPath: 'http://localhost:8080/build/',
     proxy: {
-      '/': 'http://localhost:3000'
-    }
-  }
+      '/': 'http://localhost:3000',
+    },
+  },
 };
