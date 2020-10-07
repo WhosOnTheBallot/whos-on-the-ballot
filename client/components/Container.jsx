@@ -9,12 +9,13 @@ const API_KEY = 'AIzaSyCLtsQE_ZZgnVpGOaCGFTH26EJ0QH2fPIM';
 const Container = () => {
   const [officials, setOfficials] = useState([]);
   const [selected, setSelected] = useState([]);
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   function selectOfficial(name) {
     setSelected([...selected, name]);
   }
   // Call to Google Civics API
-  const fetchOfficials = async () => {
+  async function fetchOfficials() {
     const result = await axios
       .get(
         `https://www.googleapis.com/civicinfo/v2/representatives?key=${API_KEY}&address=75078`
@@ -22,7 +23,19 @@ const Container = () => {
       .then(res => res.data.officials);
     setOfficials(result);
     return result;
-  };
+  }
+
+  // Call to Twilio API
+  function sendSMS(phoneNumber) {
+    console.log(phoneNumber);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const phoneNumber = e.target.phoneNumber.value;
+    sendSMS(phoneNumber);
+  }
 
   const { isLoading, error, data } = useQuery('officials', fetchOfficials, {
     refetchOnWindowFocus: false,
@@ -34,6 +47,14 @@ const Container = () => {
     error.message
   ) : (
     <div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor='phoneNumber'>Phone Number</label>
+          <br />
+          <input id='phoneNumber' type='tel' />
+        </div>
+        <button type='submit'>Send SMS</button>
+      </form>
       <div>
         <VoterCard selected={selected} />
       </div>
