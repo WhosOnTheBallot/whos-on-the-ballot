@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const VoterCard = props => {
-  console.log(props.selected);
   return (
     <div>
       <h1>Voter Card</h1>

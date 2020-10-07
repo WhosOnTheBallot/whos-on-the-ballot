@@ -9,6 +9,8 @@ const API_KEY = 'AIzaSyCLtsQE_ZZgnVpGOaCGFTH26EJ0QH2fPIM';
 const Container = () => {
   const [officials, setOfficials] = useState([]);
   const [selected, setSelected] = useState([]);
+  const [phoneNumber, setPhoneNumber] = useState('');
+
   function selectOfficial(name) {
     setSelected([...selected, name]);
   }
@@ -29,14 +31,11 @@ const Container = () => {
     const result = await axios
       .get(`/send-sms?tel=${phoneNumber}`)
       .then(res => res.data);
-    console.log(result);
     return result;
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    const phoneNumber = e.target.phoneNumber.value;
     sendSMS(phoneNumber);
   }
 
@@ -54,7 +53,11 @@ const Container = () => {
         <div>
           <label htmlFor='phoneNumber'>Phone Number</label>
           <br />
-          <input id='phoneNumber' type='tel' />
+          <input
+            onChange={e => setPhoneNumber(e.target.value)}
+            id='phoneNumber'
+            type='tel'
+          />
         </div>
         <button type='submit'>Send SMS</button>
       </form>
