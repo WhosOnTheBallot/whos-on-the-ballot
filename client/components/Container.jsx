@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 const axios = require('axios');
 import Card from './Card.jsx';
+import VoterCard from './VoterCard.jsx';
 
 const API_KEY = 'AIzaSyCLtsQE_ZZgnVpGOaCGFTH26EJ0QH2fPIM';
 
 const Container = () => {
   const [officials, setOfficials] = useState([]);
+  const [selected, setSelected] = useState([]);
 
+  function selectOfficial(name) {
+    setSelected([...selected, name]);
+  }
   // Call to Google Civics API
   const fetchOfficials = async () => {
     const result = await axios
@@ -28,10 +33,21 @@ const Container = () => {
   ) : error ? (
     error.message
   ) : (
-    <div className='container'>
-      {data.map(official => {
-        return <Card key={official.name} official={official} />;
-      })}
+    <div>
+      <div>
+        <VoterCard selected={selected} />
+      </div>
+      <div className='container'>
+        {data.map(official => {
+          return (
+            <Card
+              key={official.name}
+              official={official}
+              selectOfficial={selectOfficial}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

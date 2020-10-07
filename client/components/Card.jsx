@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
+
 const Card = props => {
-  const [selected, setSelected] = useState(false);
+  // const [selected, setSelected] = useState([]);
 
   const { name } = props.official;
   return (
@@ -9,7 +10,7 @@ const Card = props => {
       <span>{name}</span>
       <button
         onClick={() =>
-          selected == false ? setSelected(true) : setSelected(false)
+          props.selectOfficial(name)
         }
       >
         {' '}
