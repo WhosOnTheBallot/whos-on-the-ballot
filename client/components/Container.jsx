@@ -1,10 +1,6 @@
-import React, { Component, useState } from "react";
-import { render } from "react-dom";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 const axios = require("axios");
-import Home from "./Home.jsx";
-import Display from "./Display.jsx";
 import Card from "./Card.jsx";
 
 const API_KEY = "AIzaSyCLtsQE_ZZgnVpGOaCGFTH26EJ0QH2fPIM";
@@ -21,7 +17,9 @@ const Container = () => {
     return result;
   };
 
-  const { isLoading, error, data } = useQuery("officials", fetchOfficials);
+  const { isLoading, error, data } = useQuery("officials", fetchOfficials, {
+    refetchOnWindowFocus: false,
+  });
 
   return isLoading ? (
     "...Loading"
@@ -34,23 +32,6 @@ const Container = () => {
       })}
     </div>
   );
-
-  // return status === "loading" ? (
-  //   <span>Loading...</span>
-  // ) : status === "error" ? (
-  //   <span>Error: {error.message}</span>
-  // ) : (
-  //   <>
-  //     {isFetching ? <div>Refreshing...</div> : null}
-
-  //     <div>
-  //       <h1>Finished</h1>
-  //       {/* {officials.map((official) => (
-  //         <li key={}>{official}</li>
-  //       ))} */}
-  //     </div>
-  //   </>
-  // );
 };
 
 export default Container;
