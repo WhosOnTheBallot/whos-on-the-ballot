@@ -1,59 +1,44 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import Home from './Home.jsx';
-import Display from './Display.jsx';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { Component, useState } from "react";
+import { render } from "react-dom";
+import Home from "./Home.jsx";
+import Display from "./Display.jsx";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useQuery } from "react-query";
+const axios = require("axios");
 
-class Container extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: []
-    };
+const API_KEY = "AIzaSyCLtsQE_ZZgnVpGOaCGFTH26EJ0QH2fPIM";
 
-    this.addressSearch = this.addressSearch.bind(this);
-  }
+const Container = () => {
+  const [officials, setOfficials] = useState([]);
 
-  addressSearch(zipcode) {
-    if (!zipcode || zipcode.length < 5 || Number(zipcode) === NaN) return;
-    const reqBody = {
-      address: zipcode
-    };
-    fetch(`/officials`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(reqBody)
-    })
-      .then((response) => response.json())
-      .then((officialsData) => {
-        this.setState({
-          ...this.state,
-          data: officialsData
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          data: []
-        });
-      });
-  }
+  const fetchOfficials = () => {
+    return axios
+      .get(`https://www.googleapis.com/civicinfo/v2/representatives?key=${API_KEY}&address=75078`)
+      .then((res) => res.data.officials);
+  };
 
-  render() {
-    const itemToRender = this.state.data.length ? (
-      <Display officials={this.state.data} />
-    ) : (
-      <Home className="home" addressSearch={this.addressSearch} />
-    );
-    // let itemToRender;
-    // if (this.state.data.length) {
-    //   itemToRender = <Display officials={this.state.data} />;
-    // } else {
-    //   itemToRender = <Home className="home" addressSearch={this.addressSearch} />;
-    // }
-    return <div id="inner-container">{itemToRender}</div>;
-  }
-}
+  const { isLoading, error, data } = useQuery("officials", fetchOfficials);
+
+  console.log(data);
+
+  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+
+  // return status === "loading" ? (
+  //   <span>Loading...</span>
+  // ) : status === "error" ? (
+  //   <span>Error: {error.message}</span>
+  // ) : (
+  //   <>
+  //     {isFetching ? <div>Refreshing...</div> : null}
+
+  //     <div>
+  //       <h1>Finished</h1>
+  //       {/* {officials.map((official) => (
+  //         <li key={}>{official}</li>
+  //       ))} */}
+  //     </div>
+  //   </>
+  // );
+};
 
 export default Container;
