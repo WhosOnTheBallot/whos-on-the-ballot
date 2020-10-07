@@ -13,10 +13,12 @@ class App extends Component {
   render() {
     return (
       <div id='outer-container'>
-        <Switch>
-          <Route exact path='/' component={Login} />
-          <Route path='/search' component={Container} />
-        </Switch>
+        <Router>
+          <Switch>
+            <Route exact path='/' component={Login} />
+            <Route path='/search' component={Container} />
+          </Switch>
+        </Router>
         <ReactQueryDevtools />
       </div>
     );
