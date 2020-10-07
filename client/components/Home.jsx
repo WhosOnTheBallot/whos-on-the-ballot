@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: "",
+      address: '',
     };
   }
 
@@ -23,9 +23,12 @@ class Home extends Component {
           id='addressInput'
           placeholder='Enter your zipcode here'
           type='text'
-          onChange={(e) => this.setState({ address: e.target.value })}
+          onChange={e => this.setState({ address: e.target.value })}
         />
-        <button id='search-btn' onClick={(e) => this.props.addressSearch(this.state.address)}>
+        <button
+          id='search-btn'
+          onClick={e => this.props.addressSearch(this.state.address)}
+        >
           Search
         </button>
       </div>
