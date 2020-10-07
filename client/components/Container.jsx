@@ -11,10 +11,12 @@ const API_KEY = "AIzaSyCLtsQE_ZZgnVpGOaCGFTH26EJ0QH2fPIM";
 const Container = () => {
   const [officials, setOfficials] = useState([]);
 
-  const fetchOfficials = () => {
-    return axios
+  const fetchOfficials = async () => {
+    const result = await axios
       .get(`https://www.googleapis.com/civicinfo/v2/representatives?key=${API_KEY}&address=75078`)
       .then((res) => res.data.officials);
+    setOfficials(result);
+    return result;
   };
 
   const { isLoading, error, data } = useQuery("officials", fetchOfficials);
