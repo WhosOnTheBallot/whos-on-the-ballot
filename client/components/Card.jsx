@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 const Card = props => {
   // const [selected, setSelected] = useState([]);
 
@@ -8,14 +7,7 @@ const Card = props => {
   return (
     <div className='card'>
       <span>{name}</span>
-      <button
-        onClick={() =>
-          props.selectOfficial(name)
-        }
-      >
-        {' '}
-        Click Here
-      </button>
+      <button onClick={() => props.selectOfficial(name)}> Click Here</button>
     </div>
   );
 };
