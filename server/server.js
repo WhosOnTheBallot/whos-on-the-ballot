@@ -3,6 +3,7 @@ const passport = require('passport');
 const path = require('path');
 const passportSetup = require('./passportConfig');
 const officialsController = require('./officialsController.js');
+const smsController = require('./smsController.js');
 
 const PORT = 3000;
 
@@ -32,6 +33,10 @@ app.post(
     res.status(200).json(res.locals.officialsData);
   }
 );
+
+app.post('/send-sms', smsController.sendSMS, (req, res) => {
+  return res.end();
+});
 
 // Upon clicking the "Login with Google" button, users will be redirected to /auth/google
 // At this point, we want to make our initial authentication request to Google. This is the
