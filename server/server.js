@@ -34,7 +34,7 @@ app.post(
   }
 );
 
-app.get('/send-sms', smsController.sendSMS, (req, res) => {
+app.post('/send-sms', smsController.sendSMS, (req, res) => {
   const { message } = res.locals;
   return res.status(200).json(message);
 });

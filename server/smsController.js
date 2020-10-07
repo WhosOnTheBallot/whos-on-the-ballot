@@ -8,12 +8,13 @@ const client = require('twilio')(accountSid, authToken);
 const smsController = {};
 
 smsController.sendSMS = async (req, res, next) => {
-  const { tel } = req.query;
+  const { phoneNumber, messageBody } = req.body;
+  console.log(JSON.stringify(messageBody));
   try {
     const message = await client.messages
       .create({
-        body: 'Hello from Node',
-        to: `+1${tel}`, // Text this number
+        body: JSON.stringify(messageBody),
+        to: `+1${phoneNumber}`, // Text this number
         from: '+18563020352', // From a valid Twilio number
       })
       .then(message => console.log(message.sid));

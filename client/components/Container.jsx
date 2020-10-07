@@ -26,17 +26,25 @@ const Container = () => {
   }
 
   // Call to Twilio API
-  async function sendSMS(phoneNumber) {
-    console.log('sending sms to', phoneNumber);
-    const result = await axios
-      .get(`/send-sms?tel=${phoneNumber}`)
-      .then(res => res.data);
+  async function sendSMS(
+    phoneNumber,
+    messageBody = 'hello, this is the default message'
+  ) {
+    const config = {
+      method: 'post',
+      url: `/send-sms`,
+      data: {
+        phoneNumber,
+        messageBody,
+      },
+    };
+    const result = await axios(config).then(res => res.data);
     return result;
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    sendSMS(phoneNumber);
+    sendSMS(phoneNumber, selected);
   }
 
   const { isLoading, error, data } = useQuery('officials', fetchOfficials, {
