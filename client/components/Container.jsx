@@ -21,7 +21,19 @@ const Container = () => {
 
   console.log(data);
 
-  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+  return isLoading ? (
+    "...Loading"
+  ) : error ? (
+    error.message
+  ) : (
+    <div>
+      <ul>
+        {data.map((official) => {
+          return <li key={official.name}>{official.name}</li>;
+        })}
+      </ul>
+    </div>
+  );
 
   // return status === "loading" ? (
   //   <span>Loading...</span>
