@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 
 const Card = props => {
-  // const [selected, setSelected] = useState([]);
-
   const { name } = props.official;
   return (
     <div className='card'>
