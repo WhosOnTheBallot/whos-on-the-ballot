@@ -7,12 +7,20 @@ import VoterCard from './VoterCard.jsx';
 const API_KEY = 'AIzaSyCLtsQE_ZZgnVpGOaCGFTH26EJ0QH2fPIM';
 
 const Container = () => {
-  const [officials, setOfficials] = useState([]);
   const [selected, setSelected] = useState([]);
 
   function selectOfficial(name) {
     setSelected([...selected, name]);
   }
+
+  function removeOfficial(official) {
+    const newList = selected.filter(selectedOfficial => {
+      selectedOfficial !== official;
+    });
+    setSelected(newList);
+    console.log(`${official} removed`);
+  }
+
   // Call to Google Civics API
   const fetchOfficials = async () => {
     const result = await axios
@@ -20,7 +28,6 @@ const Container = () => {
         `https://www.googleapis.com/civicinfo/v2/representatives?key=${API_KEY}&address=75078`
       )
       .then(res => res.data.officials);
-    setOfficials(result);
     return result;
   };
 
@@ -35,7 +42,7 @@ const Container = () => {
   ) : (
     <div>
       <div>
-        <VoterCard selected={selected} />
+        <VoterCard selected={selected} removeOfficial={removeOfficial} />
       </div>
       <div className='container'>
         {data.map(official => {
