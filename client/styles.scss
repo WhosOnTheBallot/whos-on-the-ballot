@@ -45,6 +45,7 @@ $dark-bgd: #555;
 
 .whos {
   transition: 0.5s;
+
   &:hover {
     color: red;
   }
@@ -52,6 +53,7 @@ $dark-bgd: #555;
 
 .onThe {
   transition: 0.5s;
+
   &:hover {
     color: rgb(221, 216, 216);
   }
@@ -59,10 +61,12 @@ $dark-bgd: #555;
 
 .ballot {
   transition: 0.5s;
+
   &:hover {
     color: blue;
   }
 }
+
 #addressInput {
   transition: 500ms;
 
@@ -222,6 +226,7 @@ $dark-bgd: #555;
   outline: none;
   border-radius: 28px;
   transition: 0.35s;
+
   &:hover {
     box-shadow: 3px 3px 3px $btn-txt;
     color: rgb(15, 20, 30);
@@ -243,12 +248,12 @@ $dark-bgd: #555;
   border-color: rgb(9, 62, 91);
 }
 
-.articleLinksContainer {
-}
+.articleLinksContainer {}
 
 .articleLinks {
   color: whitesmoke;
   text-decoration: none;
+
   &:hover {
     color: lightblue;
     text-decoration: underline;
