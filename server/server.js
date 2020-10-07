@@ -35,8 +35,7 @@ app.post(
 );
 
 app.post('/send-sms', smsController.sendSMS, (req, res) => {
-  const { message } = res.locals;
-  return res.status(200).json(message);
+  return res.end();
 });
 
 // Upon clicking the "Login with Google" button, users will be redirected to /auth/google

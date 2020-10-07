@@ -9,7 +9,6 @@ const smsController = {};
 
 smsController.sendSMS = async (req, res, next) => {
   const { phoneNumber, messageBody } = req.body;
-  console.log(JSON.stringify(messageBody));
   try {
     const message = await client.messages
       .create({

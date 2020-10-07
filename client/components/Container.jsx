@@ -45,6 +45,13 @@ const Container = () => {
   function handleSubmit(e) {
     e.preventDefault();
     sendSMS(phoneNumber, selected);
+    setPhoneNumber('');
+    alert('Message sent! :)');
+  }
+
+  function handleChange(e) {
+    const { value } = event.target;
+    setPhoneNumber(value);
   }
 
   const { isLoading, error, data } = useQuery('officials', fetchOfficials, {
@@ -62,7 +69,8 @@ const Container = () => {
           <label htmlFor='phoneNumber'>Phone Number</label>
           <br />
           <input
-            onChange={e => setPhoneNumber(e.target.value)}
+            value={phoneNumber}
+            onChange={handleChange}
             id='phoneNumber'
             type='tel'
           />
