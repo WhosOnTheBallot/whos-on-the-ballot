@@ -58,10 +58,10 @@ app.get(
   }
 );
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-
 // Global error handler
 app.use((err, req, res, next) => {
   console.log(`Global error handler received this error: ${err}`);
   res.status(500).send('Internal server error.');
 });
+
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
