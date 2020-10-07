@@ -9,8 +9,6 @@ const API_KEY = 'AIzaSyCLtsQE_ZZgnVpGOaCGFTH26EJ0QH2fPIM';
 const Container = () => {
   const [officials, setOfficials] = useState([]);
   const [selected, setSelected] = useState([]);
-  const [phoneNumber, setPhoneNumber] = useState('');
-
   function selectOfficial(name) {
     setSelected([...selected, name]);
   }
@@ -26,8 +24,13 @@ const Container = () => {
   }
 
   // Call to Twilio API
-  function sendSMS(phoneNumber) {
-    console.log(phoneNumber);
+  async function sendSMS(phoneNumber) {
+    console.log('sending sms to', phoneNumber);
+    const result = await axios
+      .get(`/send-sms?tel=${phoneNumber}`)
+      .then(res => res.data);
+    console.log(result);
+    return result;
   }
 
   function handleSubmit(e) {

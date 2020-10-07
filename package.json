@@ -42,6 +42,7 @@
     "react-query-devtools": "2.5.1",
     "react-router-dom": "^5.2.0",
     "sass": "^1.26.11",
+    "twilio": "3.49.4",
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
