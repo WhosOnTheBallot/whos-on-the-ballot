@@ -1,9 +1,8 @@
-const express = require('express');
-const axios = require('axios');
+const express = require("express");
 
-const NewsAPI = require('newsapi');
+const NewsAPI = require("newsapi");
 
-require('dotenv').config(); // Load variables into process.env from our .env file
+require("dotenv").config(); // Load variables into process.env from our .env file
 
 const { API_KEY } = process.env; // Grab our API_KEY from the .env file
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
@@ -69,9 +68,9 @@ officialsController.getNews = (req, res, next) => {
     newsapi.v2
       .everything({
         q: `${rep.name} ${rep.office}`,
-        language: 'en',
+        language: "en",
         sources:
-          'cbs-news,associated-press,abc-news,bbc-news,bloomberg,business-insider,cnn,fortune,fox-news,google-news,msnbc,nbc-news,national-review,newsweek,the-wallstreet-journal,the-american-conservative,the-washington-post,time,usa-today,ny-times,the-washington-times,new-york-magazine',
+          "cbs-news,associated-press,abc-news,bbc-news,bloomberg,business-insider,cnn,fortune,fox-news,google-news,msnbc,nbc-news,national-review,newsweek,the-wallstreet-journal,the-american-conservative,the-washington-post,time,usa-today,ny-times,the-washington-times,new-york-magazine",
       })
       .then((response) => {
         const { articles } = response;

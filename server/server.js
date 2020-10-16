@@ -3,6 +3,7 @@ const passport = require('passport');
 const path = require('path');
 const passportSetup = require('./passportConfig');
 const officialsController = require('./officialsController.js');
+const smsController = require('./smsController.js');
 
 const PORT = 3000;
 
@@ -24,8 +25,17 @@ app.get('/search', (req, res) => {
 });
 
 // Handle route to /officials using officialsController middleware
-app.post('/officials', officialsController.getOfficials, officialsController.getNews, (req, res) => {
-  res.status(200).json(res.locals.officialsData);
+app.post(
+  '/officials',
+  officialsController.getOfficials,
+  officialsController.getNews,
+  (req, res) => {
+    res.status(200).json(res.locals.officialsData);
+  }
+);
+
+app.post('/send-sms', smsController.sendSMS, (req, res) => {
+  return res.end();
 });
 
 // Upon clicking the "Login with Google" button, users will be redirected to /auth/google
@@ -34,20 +44,24 @@ app.post('/officials', officialsController.getOfficials, officialsController.get
 app.get(
   '/auth/google',
   passport.authenticate('google', {
-    scope: [ 'profile' ]
+    scope: ['profile'],
   })
 );
 
 // This is the 2nd request we will make to Google. After the user has given us permissions and we
 // received a code from Google, we will make a 2nd request to actually get the user's info
-app.get('/auth/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.redirect('/search');
-});
-
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+app.get(
+  '/auth/google/redirect',
+  passport.authenticate('google'),
+  (req, res) => {
+    res.redirect('/search');
+  }
+);
 
 // Global error handler
 app.use((err, req, res, next) => {
   console.log(`Global error handler received this error: ${err}`);
   res.status(500).send('Internal server error.');
 });
+
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
